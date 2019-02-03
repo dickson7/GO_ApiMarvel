@@ -64,11 +64,14 @@ func main() {
 
 	
 
-	var responseObject HeroListado
+	var responseObject Response
 	json.Unmarshal(responseData, &responseObject)
 
 	fmt.Println(responseObject.Name)
 	fmt.Println(len(responseObject.Name))
-
+	
+	//for i := 0; i < len(responseObject.Pokemon); i++ {
+	//	fmt.Println(responseObject.Pokemon[i].Species.Name)
+	//}
 	
 } 
