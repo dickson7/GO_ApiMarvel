@@ -12,21 +12,23 @@ import (
 )
 
 type Response struct {
-	Id int `json:"id"`
-	Name    string    `json:"name"`
-	//Hero []Hero `json:"name"`
+	Code int `json:"code"`
+	Data  Heroes  `json:"data"`
 }
 
 
-type Hero struct {
-	EntryNo int            `json:"id"`
+type Heroes struct {
+	Total int            `json:"total"`
 	//Listado HeroListado `json:"name"`
-	Name string `json:"name"`
+	HeroListado []HeroListado   `json:"results"`
+	//Listado HeroListado
+	//Name string `json:"name"`
 }
 
 
 type HeroListado struct {
 	Name string `json:"name"`
+	Description string `json:"description"`
 }
 
 
@@ -60,18 +62,23 @@ func main() {
 		log.Fatal(err)
 	}
 	//Se imprime data traida de la api marvel
-	fmt.Println(string(responseData))
+	//fmt.Println(string(responseData))
 
 	
-
+	// La cadena JSON devuelta en una nueva variable.
 	var responseObject Response
 	json.Unmarshal(responseData, &responseObject)
-
-	fmt.Println(responseObject.Name)
-	fmt.Println(len(responseObject.Name))
 	
-	//for i := 0; i < len(responseObject.Pokemon); i++ {
-	//	fmt.Println(responseObject.Pokemon[i].Species.Name)
-	//}
+
+
+fmt.Println("________________________________________________")
+	for i := 0; i < len(responseObject.Data.HeroListado); i++ {
+		
+		fmt.Println((i*1)+1)
+		fmt.Print("Name : ")
+		fmt.Println(responseObject.Data.HeroListado[i].Name)
+		fmt.Print("Description : ")
+		fmt.Println(responseObject.Data.HeroListado[i].Description)
+	}
 	
 } 
